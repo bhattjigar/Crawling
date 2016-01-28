@@ -1,7 +1,7 @@
 
 <?php 
 
-require('algo.php');
+require('alldata.php');
 $site=new crawl('http://solanki-hardik.blogspot.in/');
 //$html=$site->web('http://hardiksolankiblog.blogspot.in/');
 

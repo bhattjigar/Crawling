@@ -2,49 +2,6 @@
 error_reporting(0);
 ini_set('max_execution_time', 0); 
 ini_set('memory_limit', '3G'); 
-class db
-{
-  public $c;
-  function __construct($server,$user,$pw,$db)
-  {
-    
-      try
-          {
-            
-            $this->c=new PDO("mysql:host=$server;dbname=$db",$user,$pw);
-            $this->c->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "connection is perfect ";
-           
-
-          }
-          
-          catch(PDOException $e)
-            {
-
-               echo $e->getMessage();
-
-            }
-  }
-  public function newtable($sql)
-  {
-                
-                $q=$this->c->prepare($sql); 
-                $q->execute();
-
-  }
-  
-    public function exe($o,$s)
-    {
-      $q=$o->prepare($s); 
-      $q->execute();
-
-      return $q->rowCount();;
-
-    }
-  }
-
-// DB class complete 
-
  class crawl 
 {
     // for get all objects   
@@ -53,7 +10,7 @@ class db
     static $domain;
     static $fordomaincount=0;
         
-    static $table;
+
     
     public function __construct($url)
     {
@@ -62,7 +19,6 @@ class db
       if(crawl::$fordomaincount==0)
       { 
         crawl::$fordomaincount=1;
-        $this->newtable($this->domain($url));
         array_push(crawl::$obj,$url);
       }
       ob_start();
@@ -373,7 +329,10 @@ endsWith("abcdef", "ef") -> true
 
              }
       
-      $this->callofperfection(crawl::$fordomaincount);
+      // disable spider for working only one page this is it 
+             
+
+      //$this->callofperfection(crawl::$fordomaincount);
 
 
     }
@@ -401,13 +360,8 @@ endsWith("abcdef", "ef") -> true
         
     }
 
-// for specific root url 
-      public function newtable($table)
-      {
 
-                crawl::$table=new db("localhost","root","","bigdata");
 
-      }
 
 
 }//final class complete 
