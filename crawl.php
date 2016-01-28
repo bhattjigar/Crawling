@@ -19,10 +19,10 @@ $site=new crawl('http://solanki-hardik.blogspot.in/');
 //print_r($site->tag);
 //print_r(crawl::$obj);
 ?>
-<!--<script type="text/javascript">
-title=<?php /*echo json_encode($site->title); ?>;
+<script type="text/javascript">
+title=<?php echo json_encode($site->title); ?>;
 link=<?php echo json_encode($site->a); ?>;
  tags = <?php echo json_encode($site->tags); ?>;
- tag = <?php echo json_encode($site->tag); */?>;
+ tag = <?php echo json_encode($site->tag); ?>;
  console.log(tag);
-</script>-->
+</script>
