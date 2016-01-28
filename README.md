@@ -6,6 +6,6 @@ Timeswen pattern algorithm
 
 #   bug 
 All urls are in array of php 
-so manimum ram required 1 GB
+so minimum ram required 1 GB
 
 
