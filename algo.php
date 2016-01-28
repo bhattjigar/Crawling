@@ -141,7 +141,7 @@ ini_set('memory_limit', '3G');
           if($tag!="html" && $tag!="style" && $tag!="script" && $tag!="body")
             {
             
-                 $this->all[$node->nodeName][$attrName][$attrNode->nodeValue]=$node->nodeValue;
+                 //$this->all[$node->nodeName][$attrName][$attrNode->nodeValue]=$node->nodeValue;
                  
                   
 
@@ -329,7 +329,10 @@ endsWith("abcdef", "ef") -> true
 
              }
       
-      $this->callofperfection(crawl::$fordomaincount);
+      // disable spider for working only one page this is it 
+             
+
+      //$this->callofperfection(crawl::$fordomaincount);
 
 
     }
