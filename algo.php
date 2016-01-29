@@ -1,18 +1,18 @@
 <?php 
-error_reporting(0);
+//error_reporting(0);
 ini_set('max_execution_time', -1); 
 ini_set('memory_limit', '3G'); 
 class db
 {
-  public $c;
+  static  $c;
   function __construct($server,$user,$pw,$db)
   {
     
       try
           {
             
-            $this->c=new PDO("mysql:host=$server;dbname=$db",$user,$pw);
-            $this->c->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            db::$c=new PDO("mysql:host=$server;dbname=$db",$user,$pw);
+            db::$c->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             echo "connection is perfect ";
            
 
@@ -25,17 +25,17 @@ class db
 
             }
   }
-  public function newtable($sql)
+  public function query($sql)
   {
-                
-                $q=$this->c->prepare($sql); 
+                echo $sql;
+                $q=db::$c->prepare($sql); 
                 $q->execute();
 
   }
   
-    public function exe($o,$s)
+    public function countrow($s)
     {
-      $q=$o->prepare($s); 
+      $q=db::$c->prepare($s); 
       $q->execute();
 
       return $q->rowCount();;
@@ -52,7 +52,7 @@ class db
     static $obj=array();
     static $domain;
     static $fordomaincount=0;
-        
+    static $tabledomain;
     static $table;
     
     public function __construct($url)
@@ -62,6 +62,7 @@ class db
       if(crawl::$fordomaincount==0)
       { 
         crawl::$fordomaincount=1;
+        crawl::$tabledomain=$this->domain($url);
         $this->newtable($this->domain($url));
         array_push(crawl::$obj,$url);
       }
@@ -276,9 +277,9 @@ endsWith("abcdef", "ef") -> true
                 
                 $oldurl=$url;
 
-                $url=$this->replace("\\","",$url);
+                $url=str_replace("\\","",$url);
 
-                $url=$this->replace('"',"",$url);
+                $url=str_replace('"',"",$url);
                 //echo $url;
                 
         if($this->startsWith($url,"//")==1)
@@ -297,7 +298,7 @@ endsWith("abcdef", "ef") -> true
 
         else if($this->startsWith($url,"./")==1)
         {
-            $url=$this->replace("./","",$url);
+            $url=str_replace("./","",$url);
             $url=$this->domain."/".$url;
             //echo "</br>./------>".$url."</br>";
         }
@@ -341,13 +342,7 @@ endsWith("abcdef", "ef") -> true
 
 
 
-// for string  replace algo 
 
-    public function replace($word,$replaceword,$string)
-    {
-        return str_replace($word,$replaceword,$string);
-
-    } 
 
   //get main domain name 
     public function domain($url)
@@ -385,7 +380,7 @@ endsWith("abcdef", "ef") -> true
     {
 
         //print_r(crawl::$obj);
-      if($pos>400)
+      if($pos>4)
       {
         
         //print_r(crawl::$obj);
@@ -396,6 +391,13 @@ endsWith("abcdef", "ef") -> true
       {
         crawl::$fordomaincount=$pos+1;
         $key=crawl::$obj[$pos+1];
+        
+        // insert url into bigdata
+
+        //$this->insert($key);
+
+        // make construct of each url 
+
         $key=new crawl($key);
       }
         
@@ -406,7 +408,23 @@ endsWith("abcdef", "ef") -> true
       {
 
                 crawl::$table=new db("localhost","root","","bigdata");
+                $newtable=<<<EOSQL
+                CREATE TABLE IF NOT EXISTS '$table' (
+                  wen_no BIGINT AUTO_INCREMENT ,
+                  wen_name text NOT NULL,
+                  PRIMARY KEY (wen_no)
+                  );
 
+EOSQL;
+                crawl::$table->query($newtable);
+
+      }
+      public function insert($val)
+      {
+        $insert=<<<EOSQL
+        INSERT INTO crawl::$tabledomain('wen_name') VALUES('$val'); 
+EOSQL;
+        crawl::$table->query($insert);
       }
 
 
