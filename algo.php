@@ -1,5 +1,5 @@
 <?php 
-//error_reporting(0);
+error_reporting(0);
 ini_set('max_execution_time', -1); 
 ini_set('memory_limit', '3G'); 
 class db
@@ -13,7 +13,7 @@ class db
             
             db::$c=new PDO("mysql:host=$server;dbname=$db",$user,$pw);
             db::$c->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "connection is perfect ";
+            //echo "connection is perfect ";
            
 
           }
@@ -27,7 +27,7 @@ class db
   }
   public function query($sql)
   {
-                echo $sql;
+                //echo $sql;
                 $q=db::$c->prepare($sql); 
                 $q->execute();
 
@@ -62,8 +62,15 @@ class db
       if(crawl::$fordomaincount==0)
       { 
         crawl::$fordomaincount=1;
-        crawl::$tabledomain=$this->domain($url);
-        $this->newtable($this->domain($url));
+        
+        //replace dot with  underscore 
+
+        crawl::$tabledomain=str_replace(".","_",$this->domain($url));
+        
+        //make call of new table 
+
+        $this->newtable();
+
         array_push(crawl::$obj,$url);
       }
       ob_start();
@@ -394,7 +401,7 @@ endsWith("abcdef", "ef") -> true
         
         // insert url into bigdata
 
-        //$this->insert($key);
+         $this->insert($key);
 
         // make construct of each url 
 
@@ -404,13 +411,20 @@ endsWith("abcdef", "ef") -> true
     }
 
 // for specific root url 
-      public function newtable($table)
+      public function newtable()
       {
 
                 crawl::$table=new db("localhost","root","","bigdata");
+                
+                // why use this beacuase in EOSQL statement 
+                // it error like undefined databse or syntax 
+
+                $table=crawl::$tabledomain;
+
+
                 $newtable=<<<EOSQL
-                CREATE TABLE IF NOT EXISTS '$table' (
-                  wen_no BIGINT AUTO_INCREMENT ,
+                CREATE TABLE IF NOT EXISTS $table (
+                  wen_no BIGINT AUTO_INCREMENT UNIQUE,
                   wen_name text NOT NULL,
                   PRIMARY KEY (wen_no)
                   );
@@ -421,8 +435,9 @@ EOSQL;
       }
       public function insert($val)
       {
+        $table=crawl::$tabledomain;
         $insert=<<<EOSQL
-        INSERT INTO crawl::$tabledomain('wen_name') VALUES('$val'); 
+        INSERT INTO $table(wen_name) VALUES('$val'); 
 EOSQL;
         crawl::$table->query($insert);
       }
