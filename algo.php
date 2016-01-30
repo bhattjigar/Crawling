@@ -424,8 +424,9 @@ endsWith("abcdef", "ef") -> true
 
                 $newtable=<<<EOSQL
                 CREATE TABLE IF NOT EXISTS $table (
-                  wen_no BIGINT AUTO_INCREMENT UNIQUE,
-                  wen_name text NOT NULL,
+                  wen_no BIGINT AUTO_INCREMENT ,
+                  wen_name TEXT NOT NULL ,
+                  wen_hash varchar(128) UNIQUE,
                   PRIMARY KEY (wen_no)
                   );
 
@@ -436,8 +437,9 @@ EOSQL;
       public function insert($val)
       {
         $table=crawl::$tabledomain;
+        $hash=hash('sha512',$val);
         $insert=<<<EOSQL
-        INSERT INTO $table(wen_name) VALUES('$val'); 
+        INSERT IGNORE INTO $table(wen_name,wen_hash) VALUES('$val','$hash'); 
 EOSQL;
         crawl::$table->query($insert);
       }
