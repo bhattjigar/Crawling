@@ -1,5 +1,5 @@
 <?php 
-error_reporting(0);
+//error_reporting(0);
 ini_set('max_execution_time', -1); 
 ini_set('memory_limit', '3G'); 
 class db
@@ -67,9 +67,7 @@ class db
 
         crawl::$tabledomain=str_replace(".","_",$this->domain($url));
         
-        //make call of new table 
-
-        $this->newtable();
+        
 
         array_push(crawl::$obj,$url);
       }
@@ -91,6 +89,11 @@ class db
       crawl::$domain=$this->domain;
       // this is url 
 
+      //make call of new table 
+
+        $this->newtable();
+
+        
       $this->url=$url;
 
         if (!function_exists('curl_init'))
@@ -387,7 +390,7 @@ endsWith("abcdef", "ef") -> true
     {
 
         //print_r(crawl::$obj);
-      if($pos>4)
+      if($pos>100)
       {
         
         //print_r(crawl::$obj);
@@ -433,6 +436,7 @@ endsWith("abcdef", "ef") -> true
 EOSQL;
                 crawl::$table->query($newtable);
 
+                $this->insert(crawl::$domain);
       }
       public function insert($val)
       {
