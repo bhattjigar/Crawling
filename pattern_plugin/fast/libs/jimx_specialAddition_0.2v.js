@@ -172,6 +172,7 @@ var jimxHelp = function( s ){
 		document.addEventListener("initAll",fn);
 	}
 	
+	//On window load complete disptach init all event that will called jimxHelp.ready function
 	window.onload = function(){
 		document.dispatchEvent(initAllEvent,"initAll");
 	};
