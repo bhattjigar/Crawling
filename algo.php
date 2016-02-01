@@ -1,5 +1,5 @@
 <?php 
-error_reporting(0);
+//error_reporting(0);
 ini_set('max_execution_time', -1); 
 ini_set('memory_limit', '3G'); 
 class db
@@ -67,9 +67,7 @@ class db
 
         crawl::$tabledomain=str_replace(".","_",$this->domain($url));
         
-        //make call of new table 
-
-        $this->newtable();
+        
 
         array_push(crawl::$obj,$url);
       }
@@ -91,6 +89,11 @@ class db
       crawl::$domain=$this->domain;
       // this is url 
 
+      //make call of new table 
+
+        $this->newtable();
+
+        
       $this->url=$url;
 
         if (!function_exists('curl_init'))
@@ -387,7 +390,7 @@ endsWith("abcdef", "ef") -> true
     {
 
         //print_r(crawl::$obj);
-      if($pos>4)
+      if($pos>100)
       {
         
         //print_r(crawl::$obj);
@@ -424,20 +427,23 @@ endsWith("abcdef", "ef") -> true
 
                 $newtable=<<<EOSQL
                 CREATE TABLE IF NOT EXISTS $table (
-                  wen_no BIGINT AUTO_INCREMENT UNIQUE,
-                  wen_name text NOT NULL,
+                  wen_no BIGINT AUTO_INCREMENT ,
+                  wen_name TEXT NOT NULL ,
+                  wen_hash varchar(128) UNIQUE,
                   PRIMARY KEY (wen_no)
                   );
 
 EOSQL;
                 crawl::$table->query($newtable);
 
+                $this->insert(crawl::$domain);
       }
       public function insert($val)
       {
         $table=crawl::$tabledomain;
+        $hash=hash('sha512',$val);
         $insert=<<<EOSQL
-        INSERT INTO $table(wen_name) VALUES('$val'); 
+        INSERT IGNORE INTO $table(wen_name,wen_hash) VALUES('$val','$hash'); 
 EOSQL;
         crawl::$table->query($insert);
       }
