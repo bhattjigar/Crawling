@@ -45,6 +45,26 @@ class db
 
 // DB class complete 
 
+/* LIST OF FUNCTIONS 
+  1. GETNAME   - for get all available tags in page 
+  2.NODEINN    - for fetching each node
+  3.ATTR       - for get all attributes value 
+  4.STRATSWITH - for checking starting words 
+  5.ENSWITH    - for checking ending words 
+  6.TITLE      - for geting title and h1 and other tags 
+  7.VALIDATEURL- for valinding urls for missing words 
+  8.DOMAIN     - get the current url main domain name or host name
+  9.MAKEARRAY  - for making array with unique values 
+ 10.CALLORPERFECTION   
+   for setting database and count down the all urls
+ 11.NEWTABLE   - for making 1st time calling urls create table
+ 12.INSERT     - for  insering data in database
+
+
+*/
+
+
+
  class crawl 
 {
     // for get all objects   
