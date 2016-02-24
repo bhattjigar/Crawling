@@ -2,7 +2,7 @@
 <?php 
 
 require('alldata.php');
-$site=new crawl('http://solanki-hardik.blogspot.in/');
+$site=new crawl('http://anjalifashion.in/');
 //$html=$site->web('http://hardiksolankiblog.blogspot.in/');
 
 //$site->getname($html);

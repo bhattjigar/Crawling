@@ -191,12 +191,7 @@ class db
 
       foreach($this->dom->getElementsByTagName($tag) as $e )
         {
-
-          
           $this->att($e);
-          
-           
-
         }
     }
 

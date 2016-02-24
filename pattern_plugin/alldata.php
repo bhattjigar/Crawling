@@ -59,7 +59,8 @@ ini_set('memory_limit', '3G');
 
       curl_setopt($curl, CURLOPT_URL, $url);
       //curl_setopt($curl, CURLOPT_REFERER, "www.torrentz.in");
-      curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36");
+      //curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36");
+      curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; Wenbot/2.1; +http://www.timeswen.com/wenbot)");
       curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
 
       //curl_setopt($curl, CURLOPT_REFERER, "http://www.facebook.com");
