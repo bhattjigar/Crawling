@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pattern Identifier </title>
+	<link href='http://fonts.googleapis.com/css?family=Muli' rel='stylesheet' type='text/css'>
+	<style type="text/css">
+	input
+	{
+		height: 30px;
+		width: 600px;
+		font-size: 14px;
+		font-family: 'Muli';
+	}
+.content {
+  width: 237px;
+  font-size: 26px;
+  line-height: 40px;
+  font-family: 'Muli';
+  
+  height: 40px;
+  margin-top: 10px;
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  margin-top: -5px;
+  margin-left: -18px;
+}
+.content:before {
+  content: '[';
+  position: absolute;
+  left: -30px;
+  line-height: 40px;
+}
+.content:after {
+  content: ']';
+  position: absolute;
+  right: -30px;
+  line-height: 40px;
+}
+.content:after,
+.content:before {
+  color: #16a085;
+  font-size: 42px;
+  animation: 2s linear 0s normal none infinite opacity;
+  -webkit-animation: 2s ease-out 0s normal none infinite opacity;
+  -moz-animation: 2s ease-out 0s normal none infinite opacity;
+  -o-animation: 2s ease-out 0s normal none infinite opacity;
+}
+.visible {
+  float: left;
+  font-weight: 600;
+  overflow: hidden;
+  height: 40px;
+}
+p {
+  display: inline;
+  float: left;
+  margin: 0;
+}
+ul {
+  margin-top: 0;
+  padding-left: 110px;
+  text-align: left;
+  list-style: none;
+  animation: 6s linear 0s normal none infinite change;
+  -webkit-animation: 6s linear 0s normal none infinite change;
+  -moz-animation: 6s linear 0s normal none infinite change;
+  -o-animation: 6s linear 0s normal none infinite change;
+}
+ul li {
+  line-height: 40px;
+  margin: 0;
+}
+@-webkit-keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes change {
+  0% {
+    margin-top: 0;
+  }
+  15% {
+    margin-top: 0;
+  }
+  25% {
+    margin-top: -40px;
+  }
+  40% {
+    margin-top: -40px;
+  }
+  50% {
+    margin-top: -80px;
+  }
+  65% {
+    margin-top: -80px;
+  }
+  75% {
+    margin-top: -40px;
+  }
+  85% {
+    margin-top: -40px;
+  }
+  100% {
+    margin-top: 0;
+  }
+}
+@keyframes change {
+  0% {
+    margin-top: 0;
+  }
+  15% {
+    margin-top: 0;
+  }
+  25% {
+    margin-top: -40px;
+  }
+  40% {
+    margin-top: -40px;
+  }
+  50% {
+    margin-top: -80px;
+  }
+  65% {
+    margin-top: -80px;
+  }
+  75% {
+    margin-top: -40px;
+  }
+  85% {
+    margin-top: -40px;
+  }
+  100% {
+    margin-top: 0;
+  }
+}
+
+
+.button {
+  border-radius: 2px;
+  background-color: #eee;
+  border: none;
+  color: #0000;
+  text-align: center;
+  font-size: 14px;
+  padding: 10px;
+  width: 100px;
+  transition: all 0.3s;
+  cursor: pointer;
+  margin: 5px;
+  border:1px solid;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.3s;
+}
+
+.button span:after {
+  /*content: '»';*/
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.3s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+	select{
+   margin: 50px;
+    border: 1px solid #111;
+   background: transparent;
+   width: 150px;
+   padding: 5px 35px 5px 5px;
+   font-size: 16px;
+   border: 1px solid #ccc;
+   height: 34px;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+    background: url(https://cdn2.iconfinder.com/data/icons/web-and-mobile-ui-volume-9/48/437-128.png) 96% / 15% no-repeat #eee;
+} 
+.table{
+   margin: 50px;
+    border: 1px solid #111;
+   background: transparent;
+   width: auto;
+   padding: 5px 35px 5px 5px;
+   font-size: 16px;
+   border: 1px solid #ccc;
+   height: auto;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+    background: url(https://cdn2.iconfinder.com/data/icons/web-and-mobile-ui-volume-9/48/437-128.png) 96% / 15% no-repeat #fff;
+} 
+#pattern{
+margin: 50px;
+    border: 1px solid #111;
+   background: transparent;
+   width: auto;
+   padding: 5px 35px 5px 5px;
+   font-size: 16px;
+   border: 1px solid #ccc;
+   height: auto;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+    background: #fff;
+}
+/*target Internet Explorer 9 and Internet Explorer 10:*/
+@media screen and (min-width:0\0) { 
+    select {
+        background:none;
+        padding: 5px;
+    }
+}
+
+
+	</style>
+	
+	
+	
+</head>
+<body>
+	<div class='content'>
+  <div class='visible'>
+    <p>
+      Hello
+    </p>
+    <ul>
+      <li>Timeswen!</li>
+      <li>JB !</li>
+      <li>user !</li>
+    </ul>
+  </div>
+</div>
+	
+	<input type="text " id="url"/>
+	<button id="enter" class="button"><span>Go GO </span></button>
+</br>
+<div id="demo">
+
+</div></br>
+<div id="p"></div>
+</body>
+<script type="text/javascript">
+
+e=document.getElementById("enter");
+	u=document.getElementById("url");
+node={};
+array=new Array();
+fuck={};
+ajx=function()
+{
+  document.getElementById("submit").disabled = true;
+  data1=array.toString()
+  url=u.value;
+      var wen = new XMLHttpRequest();
+      wen.onreadystatechange = function() {
+        if (wen.readyState == 4 && wen.status == 200) 
+        {
+          document.getElementById("submit").disabled= false;
+            //document.getElementById("demo").innerHTML = wen.responseTewent;
+            
+        }
+  }
+  wen.open("POST", "./en/index.php", true);
+  wen.send(l.url+"+^+"+data1);
+
+}
+	vvci=function(id)
+	{
+    a=ci.id.toString();
+    b=vci.id.toString();
+    c=id.value.toString();
+
+     html="Pattern: <button class='table'>"+a+"</br>"+b+"</br>"+c+"</button>";
+      html+="</br>";
+      /*fuck[a][b]=""*/
+      console.log(fuck);
+      
+      
+      p=a+'-->'+b+'-->'+c;
+      
+      if(array.indexOf(p)<0)
+      {
+        array.push(p);  
+      }
+    document.getElementById("demo").innerHTML+=html;
+    pn=document.getElementById("p")
+    pn.innerHTML="WAY TO CRAWL :</br>";
+    for(a in array)
+    {
+      pn.innerHTML+="<button id='pattern'>"+array[a]+"</button>";
+    }
+    pn.innerHTML+='</br><button id="submit" class="button" onclick="ajx()"><span>SUBMIT</span></button>';
+    console.log(array);
+	}
+	vci=function(id)
+	{
+		id=id.value;
+			vci.id=id;
+
+			html="Property :<select id='id:classfinal' onchange='vvci(this)'>"
+			html+="<option value=0>Select</option>";
+			/*console.log(data[ci.id][id]);*/
+	      		for(x in data[ci.id][id])
+	      		{
+	      			html+="<option value='"+x+"' >"+x+"</option>"
+	      		}
+	      		html+="</select>";
+	      		document.getElementById("demo").innerHTML=ci.html+html;
+
+	      		vci.html=l.html+html;
+	}
+	
+		ci=function(tag)
+		{
+			tag=tag.value;
+			ci.id=tag;
+
+			html="Property :<select id='id:class' onchange='vci(this)'>"
+			html+="<option value=0>Select</option>";
+	      		for(x in data[tag])
+	      		{
+	      			html+="<option value='"+x+"' >"+x+"</option>"
+	      		}
+	      		html+="</select>";
+	      		document.getElementById("demo").innerHTML=l.html+html;
+	      		ci.html=l.html+html;
+
+		}
+
+
+		l=function(){
+			url=u.value;
+      l.url=url;
+		  var x = new XMLHttpRequest();
+		  x.onreadystatechange = function() {
+		    if (x.readyState == 4 && x.status == 200) 
+		    {
+
+	      		//document.getElementById("demo").innerHTML = x.responseText;
+	      		data=JSON.parse(x.responseText);
+	      		html="<select id='tag' onchange='ci(this)'>";
+	      		html+="<option value=0>Select</option>";
+	      		for(x in data)
+	      		{
+	      			html+="<option value='"+x+"' >"+x+"</option>"
+	      		}
+	      		html+="</select>";
+	      		document.getElementById("demo").innerHTML = html;
+	      		l.html=html;
+	      		
+	      		
+
+    		}
+  }
+  x.open("POST", "./", true);
+  x.send(url);
+}
+
+e.addEventListener("click", l);
+
+
+
+	</script>
+
+</html>
