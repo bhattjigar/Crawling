@@ -62,7 +62,7 @@ function file_get_html($url, $use_include_path = false, $context=null, $offset =
                     $html=curl_exec($ch);
 
                     $report=curl_getinfo($ch);
-                    print_r($report);
+                    // print_r($report);
                     curl_close($ch);
                       /*echo $url."</br>".$report['http_code']."</br>";*/
                       

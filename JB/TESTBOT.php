@@ -60,9 +60,9 @@ function removeclassidstyle($html)
 
 
   // $url="http://stackoverflow.com/questions/129898/javascript-and-session-variables/24508546";
-  // $url="http://www.indiatimes.com/news/india/india-will-be-one-of-the-worst-hit-countries-by-climate-change-claims-oxford-university-study-251566.html" ;
+  $url="http://www.indiatimes.com/news/india/india-will-be-one-of-the-worst-hit-countries-by-climate-change-claims-oxford-university-study-251566.html" ;
   // $url = "http://www.indiatimes.com/news/india/rs-6-300-cr-in-debt-vijay-mallya-now-claims-banks-are-victimising-him-251623.html";
-$url = "http://www.scoopwhoop.com/15-Epic-BehindTheScenes-Shots-Of-Hollywood-Heroes-Villains-Chilling-Together/";
+// $url = "http://www.scoopwhoop.com/15-Epic-BehindTheScenes-Shots-Of-Hollywood-Heroes-Villains-Chilling-Together/";
   $GLOBALS['html'] =file_get_html($url);
     // $why= str_get_html($html);
 

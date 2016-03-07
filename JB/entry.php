@@ -9,13 +9,21 @@
   	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.js"></script>
 	  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
         
-        <script type="text/javascript">
-        	// angular
 
+	  <script type="text/javascript">
+	  	$(document).ready(function () {
+	  		$("select").material_select();
+	  	});
+
+	  </script>
+ 		<script type="text/javascript">
+        	// angular
+        	var materialColorRoundRound = ' <div class="progress"><div class="indeterminate"></div></div>';
         	app = angular.module("app1",[]);
 
         	app.controller("appCtr",['$scope','$http',function($scope,$http){
 
+        		$scope.dis = "none";
         		$scope.patternList = [];
 
         		$scope.options = ["1","2","3","4","5"];
@@ -32,6 +40,7 @@
 	        		};
 	        	
 	        		$scope.appendNewPattern = function(){
+
 	        			$scope.txt = $scope.txt.slice(0,$scope.depthValue);
 	        			$scope.patternList.push(
 	     							
@@ -42,29 +51,30 @@
 	        		};
 
 	        		$scope.updateDb = function(){
+	        			$scope.dis = "block";
+	        			$("#htmLoaderDiv").html(materialColorRoundRound);
 	        			$http.post("./TESTBOT.php",$scope.patternList).success(function(d){
-	        				console.log(d);
+	        				// console.log(d);
+	        				
+	        				$("#htmLoaderDiv").html(d);
+	        				
+	        				// console.log(dx);
 	        			});
+	        		};
+
+	        		$scope.removeMe = function(id){
+	        			console.log(id);
+	        			$scope.patternList.splice(id, 1 );
+
 	        		};
 
         	}]);	
 
         </script>  
-	  <script type="text/javascript">
-	  	$(document).ready(function () {
-	  		$("select").material_select();
-	  	});
 
-	  </script>
 
 	<style type="text/css">
-	/*input
-	{
-		height: 30px;
-		width: 600px;
-		font-size: 14px;
-		font-family: 'Muli';
-	}*/
+
 	body {
 	    text-align: justify;
 	    text-justify: inter-word;
@@ -72,6 +82,29 @@
 	.pad-left-50{
 		padding-left: 50px!important;
 	}
+	img{
+		width: 100%;
+		height: 200px;
+		overflow: hidden;
+	}
+	h1{
+		  text-align: left;
+	    text-justify: inter-word;
+	}
+	.progress > .indeterminate{
+		background: #64b5f6;
+	}
+	.progress > .indeterminate::before {
+		background: #1565c0;
+	}
+	.progress > .indeterminate::after {
+		background: #1565c0;
+	}
+	.collection-item > a {
+		line-height : 26px !important;
+	}
+
+
 		</style>
 </head>
 <body ng-controller="appCtr">
@@ -137,7 +170,7 @@
 
 					</div>
 				</div>
-				<div class="row"  ng-if="depthValue != 'depth'">
+				<div class="row"  ng-if="depthValue != 'depth' && patternList.length>0 ">
 						<form ng-submit="updateDb()">
 							<ul class="collection with-header">
 	        				
@@ -145,31 +178,27 @@
 
 	        				</li>
 	      						<li class="collection-item" ng-repeat="i in patternList track by $index">
-									* {{ i }}
+									*&nbsp;&nbsp;&nbsp;{{ i }}<a href="" class="right" ng-click="removeMe($index)"><i class="material-icons">close</i></a>
 								</li>				
 							</ul>
         				</form>
 				</div>
 
-		<!-- 	<div class="col s12">
+			<div class="col s12" style="display: {{dis}}" >
 				
 
-				  <div class="card">
-					   <div class="card-content">
-			              <p>I am a very simple card. I am good at containing small bits of information.
-			              I am convenient because I require little markup to use effectively.</p>
+				  <div class="card" >
+					   <div class="card-content" id="htmLoaderDiv">
 			            </div>
-			            
-			            <div class="card-action">
-			              <a href="#">This is a link</a>
-			            </div>
+			           
 				  </div>
 
 
 
-			</div> -->
+			</div> 
 
 		
 	</div>
+
 </body>
 </html>
