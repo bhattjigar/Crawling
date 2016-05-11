@@ -1,8 +1,8 @@
 # NEWS
- Timeswen 
+TIMESWEN 
 #Suggestion 
-scheduler is required </br>
-python script is manger of the timeswen
+Scheduler is required</br>
+Python script is manager of the TIMESWEN
 #Crawler 
 <img src="https://www.python.org/static/img/python-logo.png" />
 #Server side & Crawler 
